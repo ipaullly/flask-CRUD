@@ -26,12 +26,15 @@ def index():
 def new():
     return render_template('new.html')
 
-@app.route('/students/<int:id>', methods=["GET", "PATCH"])
+@app.route('/students/<int:id>', methods=["GET", "PATCH", "DELETE"])
 def show(id):
     found_student = find_student(id)
     if request.method == b'PATCH':
         found_student.first_name = request.form['first_name']
         found_student.last_name = request.form['last_name']
+        return redirect(url_for('index'))
+    if request.method == b'DELETE':
+        students.remove(found_student)
         return redirect(url_for('index'))
     return render_template('show.html', student=found_student)
 
