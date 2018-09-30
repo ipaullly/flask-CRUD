@@ -3,5 +3,12 @@
 {% block content %}
 
 <h1>See all the students</h1>
-
+<br>
+<a href="{{url_for('new')}}">Add a new Student</a>
+<br>
+{% for student in students %}
+    <p>
+        {{student.first_name}} {{student.last_name}}
+    </p>
+{% endfor %}
 {% endblock %}

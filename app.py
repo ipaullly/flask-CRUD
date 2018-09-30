@@ -11,6 +11,14 @@ def root():
 
 @app.route('/students', methods=["GET", "POST"])
 def index():
+    if request.method == 'POST':
+        new_student = Student(request.form['first_name'], request.form['last_name'])
+        students.append(new_student)
+        return redirect(url_for('index'))
     return render_template('index.html', students=students)
+
+@app.route('/students/new')
+def new():
+    return render_template('new.html')
 if __name__ == '__main__':
     app.run(debug=True)
